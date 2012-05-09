@@ -98,5 +98,10 @@ namespace GithubBrowser.ViewModel
         protected abstract void LoadSampleData();
         protected abstract void LoadData();
 
+        public void Refresh()
+        {
+            LoadData();
+        }
+
     }
 }

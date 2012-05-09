@@ -7,49 +7,46 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
     xmlns:toolkitPrimitives="clr-namespace:Microsoft.Phone.Controls.Primitives;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:GithubBrowser_ViewModel="clr-namespace:GithubBrowser.ViewModel" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71" x:Class="GithubBrowser.View.RepositoriesView"
+    xmlns:GithubBrowser_ViewModel="clr-namespace:GithubBrowser.ViewModel" xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71" xmlns:AppBarUtils="clr-namespace:AppBarUtils;assembly=AppBarUtils" xmlns:ec="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions" x:Class="GithubBrowser.View.RepositoriesView"
     mc:Ignorable="d"
     d:DesignWidth="480"
-    d:DesignHeight="768"
+    d:DesignHeight="696"
     SupportedOrientations="Portrait"
     Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     toolkit:TiltEffect.IsTiltEnabled="True"
-    DataContext="{Binding Source={StaticResource Locator}, Path=RepositoriesViewModel}"
+    DataContext="{Binding RepositoriesViewModel, Source={StaticResource Locator}}"
     Style="{StaticResource Transition}"
+    FontSize="{StaticResource PhoneFontSizeNormal}" Foreground="{StaticResource PhoneForegroundBrush}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
 >
-
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/Icons/appbar.refresh.rest.png" Text="refresh"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+                <shell:ApplicationBarMenuItem Text="about"/>
+                <shell:ApplicationBarMenuItem Text="logout"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-    
-	<phone:PhoneApplicationPage.FontFamily>
-		<StaticResource ResourceKey="PhoneFontFamilyNormal"/>
-	</phone:PhoneApplicationPage.FontFamily>
-	<phone:PhoneApplicationPage.FontSize>
-		<StaticResource ResourceKey="PhoneFontSizeNormal"/>
-	</phone:PhoneApplicationPage.FontSize>
-	<phone:PhoneApplicationPage.Foreground>
-		<StaticResource ResourceKey="PhoneForegroundBrush"/>
-	</phone:PhoneApplicationPage.Foreground>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    <i:Interaction.Triggers>
+        <AppBarUtils:AppBarItemTrigger Id="refresh" Text="reload" Type="Button">
+			<ec:CallMethodAction MethodName="Refresh" TargetObject="{Binding}" />
+		</AppBarUtils:AppBarItemTrigger>
+        <AppBarUtils:AppBarItemTrigger Id="about" Text="about" Type="MenuItem">
+            <ec:NavigateToPageAction TargetPage="/View/AboutView.xaml" />
+        </AppBarUtils:AppBarItemTrigger>
+    </i:Interaction.Triggers>
 
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+        	<RowDefinition Height="Auto" />
+        	<RowDefinition Height="Auto" />
+        	<RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <toolkit:PerformanceProgressBar Name="performanceProgressBar1" IsIndeterminate="{Binding Path=Loading}" />
+        <toolkit:PerformanceProgressBar x:Name="performanceProgressBar1" IsIndeterminate="{Binding Loading}" />
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="1">
@@ -65,11 +62,11 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="2">
-        	<ListBox x:Name="Repositories" ItemsSource="{Binding Path=Repositories}">
+        	<ListBox x:Name="Repositories" ItemsSource="{Binding Repositories}">
                 <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Tap">
-                        <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding RepositorySelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=Repositories}" />
-                    </i:EventTrigger>
+                	<i:EventTrigger EventName="Tap">
+                		<GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding RepositorySelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=Repositories}" />
+                	</i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListBox.ItemTemplate>
                     <DataTemplate>

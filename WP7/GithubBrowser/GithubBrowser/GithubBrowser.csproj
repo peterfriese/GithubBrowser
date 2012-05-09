@@ -25,6 +25,8 @@
     <SilverlightAppEntry>GithubBrowser.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.30816.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +50,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AppBarUtils">
+      <HintPath>..\packages\AppBarUtils.1.4\lib\AppBarUtils.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.WP71">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WP71\GalaSoft.MvvmLight.WP71.dll</HintPath>
@@ -56,6 +61,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Laurent Bugnion (GalaSoft)\Mvvm Light Toolkit\Binaries\WP71\GalaSoft.MvvmLight.Extras.WP71.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
       <HintPath>..\packages\SilverlightToolkitWP.4.2011.12.14\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
@@ -97,6 +103,9 @@
     <Compile Include="ViewModel\RepositoriesViewModel.cs" />
     <Compile Include="ViewModel\RepositoryViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RepositoriesView.xaml.cs">
       <DependentUpon>RepositoriesView.xaml</DependentUpon>
     </Compile>
@@ -112,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RepositoriesView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +146,38 @@
   <ItemGroup>
     <Resource Include="ApplicationIcon.png" />
     <Resource Include="Background.png" />
+    <Content Include="Icons\appbar.add.rest.png" />
+    <Content Include="Icons\appbar.back.rest.png" />
+    <Content Include="Icons\appbar.basecircle.rest.png" />
+    <Content Include="Icons\appbar.cancel.rest.png" />
+    <Content Include="Icons\appbar.check.rest.png" />
+    <Content Include="Icons\appbar.close.rest.png" />
+    <Content Include="Icons\appbar.delete.rest.png" />
+    <Content Include="Icons\appbar.download.rest.png" />
+    <Content Include="Icons\appbar.edit.rest.png" />
+    <Content Include="Icons\appbar.favs.addto.rest.png" />
+    <Content Include="Icons\appbar.favs.rest.png" />
+    <Content Include="Icons\appbar.feature.camera.rest.png" />
+    <Content Include="Icons\appbar.feature.email.rest.png" />
+    <Content Include="Icons\appbar.feature.search.rest.png" />
+    <Content Include="Icons\appbar.feature.settings.rest.png" />
+    <Content Include="Icons\appbar.feature.video.rest.png" />
+    <Content Include="Icons\appbar.folder.rest.png" />
+    <Content Include="Icons\appbar.minus.rest.png" />
+    <Content Include="Icons\appbar.new.rest.png" />
+    <Content Include="Icons\appbar.next.rest.png" />
+    <Content Include="Icons\appbar.overflowdots.png" />
+    <Content Include="Icons\appbar.questionmark.rest.png" />
+    <Content Include="Icons\appbar.refresh.rest.png" />
+    <Content Include="Icons\appbar.save.rest.png" />
+    <Content Include="Icons\appbar.share.rest.png" />
+    <Content Include="Icons\appbar.stop.rest.png" />
+    <Content Include="Icons\appbar.sync.rest.png" />
+    <Content Include="Icons\appbar.transport.ff.rest.png" />
+    <Content Include="Icons\appbar.transport.pause.rest.png" />
+    <Content Include="Icons\appbar.transport.play.rest.png" />
+    <Content Include="Icons\appbar.transport.rew.rest.png" />
+    <Content Include="Icons\appbar.upload.rest.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="SplashScreenImage2.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
