@@ -89,31 +89,51 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Extensions\SplashScreen.cs" />
-    <Compile Include="Model\CommitWrapper.cs" />
-    <Compile Include="Model\CommitNode.cs" />
-    <Compile Include="Model\CommitUser.cs" />
-    <Compile Include="Model\Commit.cs" />
-    <Compile Include="Model\Repository.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="Application\Extensions\SplashScreen.cs" />
+    <Compile Include="Application\Model\CommitWrapper.cs" />
+    <Compile Include="Application\Model\CommitNode.cs" />
+    <Compile Include="Application\Model\CommitUser.cs" />
+    <Compile Include="Application\Model\Commit.cs" />
+    <Compile Include="Application\Model\Repository.cs" />
+    <Compile Include="Application\Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\ApplicationNavigationService.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\CommitsViewModel.cs" />
-    <Compile Include="ViewModel\RepositoriesViewModel.cs" />
-    <Compile Include="ViewModel\RepositoryViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\AboutView.xaml.cs">
+    <Compile Include="Base\Service\ApplicationNavigationService.cs" />
+    <Compile Include="Base\Service\AuthenticationMessage.cs" />
+    <Compile Include="Base\Service\BaseRestService.cs" />
+    <Compile Include="Application\Service\GithubService.cs" />
+    <Compile Include="Application\UserControls\RepositoriesListView.xaml.cs">
+      <DependentUpon>RepositoriesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Application\UserControls\SignInScreen.xaml.cs">
+      <DependentUpon>SignInScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Base\Utils\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Base\Utils\Converters\NegatingConverter.cs" />
+    <Compile Include="Base\Utils\GlobalProgressIndicator.cs" />
+    <Compile Include="Base\ViewModel\BasePivotViewModel.cs" />
+    <Compile Include="Base\ViewModel\BaseViewModel.cs" />
+    <Compile Include="Application\ViewModel\CommitsViewModel.cs" />
+    <Compile Include="Application\ViewModel\HomeViewModel.cs" />
+    <Compile Include="Application\ViewModel\ProgressMessage.cs" />
+    <Compile Include="Application\ViewModel\RepositoriesViewModel.cs" />
+    <Compile Include="Application\ViewModel\RepositoryViewModel.cs" />
+    <Compile Include="Application\ViewModel\SignInViewModel.cs" />
+    <Compile Include="Application\ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Application\ViewModel\WelcomeViewModel.cs" />
+    <Compile Include="Application\View\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RepositoriesView.xaml.cs">
-      <DependentUpon>RepositoriesView.xaml</DependentUpon>
+    <Compile Include="Application\View\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\RepositoryView.xaml.cs">
+    <Compile Include="Application\View\RepositoryView.xaml.cs">
       <DependentUpon>RepositoryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SplashScreen.xaml.cs">
+    <Compile Include="Application\UserControls\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Application\View\WelcomeView.xaml.cs">
+      <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -121,19 +141,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\AboutView.xaml">
+    <Page Include="Application\UserControls\RepositoriesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RepositoriesView.xaml">
+    <Page Include="Application\UserControls\SignInScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\View\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\View\HomeView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\RepositoryView.xaml">
+    <Page Include="Application\View\RepositoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SplashScreen.xaml">
+    <Page Include="Application\UserControls\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\View\WelcomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,49 +173,47 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ApplicationIcon.png" />
     <Resource Include="Background.png" />
-    <Content Include="Icons\appbar.add.rest.png" />
-    <Content Include="Icons\appbar.back.rest.png" />
-    <Content Include="Icons\appbar.basecircle.rest.png" />
-    <Content Include="Icons\appbar.cancel.rest.png" />
-    <Content Include="Icons\appbar.check.rest.png" />
-    <Content Include="Icons\appbar.close.rest.png" />
-    <Content Include="Icons\appbar.delete.rest.png" />
-    <Content Include="Icons\appbar.download.rest.png" />
-    <Content Include="Icons\appbar.edit.rest.png" />
-    <Content Include="Icons\appbar.favs.addto.rest.png" />
-    <Content Include="Icons\appbar.favs.rest.png" />
-    <Content Include="Icons\appbar.feature.camera.rest.png" />
-    <Content Include="Icons\appbar.feature.email.rest.png" />
-    <Content Include="Icons\appbar.feature.search.rest.png" />
-    <Content Include="Icons\appbar.feature.settings.rest.png" />
-    <Content Include="Icons\appbar.feature.video.rest.png" />
-    <Content Include="Icons\appbar.folder.rest.png" />
-    <Content Include="Icons\appbar.minus.rest.png" />
-    <Content Include="Icons\appbar.new.rest.png" />
-    <Content Include="Icons\appbar.next.rest.png" />
-    <Content Include="Icons\appbar.overflowdots.png" />
-    <Content Include="Icons\appbar.questionmark.rest.png" />
-    <Content Include="Icons\appbar.refresh.rest.png" />
-    <Content Include="Icons\appbar.save.rest.png" />
-    <Content Include="Icons\appbar.share.rest.png" />
-    <Content Include="Icons\appbar.stop.rest.png" />
-    <Content Include="Icons\appbar.sync.rest.png" />
-    <Content Include="Icons\appbar.transport.ff.rest.png" />
-    <Content Include="Icons\appbar.transport.pause.rest.png" />
-    <Content Include="Icons\appbar.transport.play.rest.png" />
-    <Content Include="Icons\appbar.transport.rew.rest.png" />
-    <Content Include="Icons\appbar.upload.rest.png" />
+    <Content Include="Base\Icons\appbar.add.rest.png" />
+    <Content Include="Base\Icons\appbar.back.rest.png" />
+    <Content Include="Base\Icons\appbar.basecircle.rest.png" />
+    <Content Include="Base\Icons\appbar.cancel.rest.png" />
+    <Content Include="Base\Icons\appbar.check.rest.png" />
+    <Content Include="Base\Icons\appbar.close.rest.png" />
+    <Content Include="Base\Icons\appbar.delete.rest.png" />
+    <Content Include="Base\Icons\appbar.download.rest.png" />
+    <Content Include="Base\Icons\appbar.edit.rest.png" />
+    <Content Include="Base\Icons\appbar.favs.addto.rest.png" />
+    <Content Include="Base\Icons\appbar.favs.rest.png" />
+    <Content Include="Base\Icons\appbar.feature.camera.rest.png" />
+    <Content Include="Base\Icons\appbar.feature.email.rest.png" />
+    <Content Include="Base\Icons\appbar.feature.search.rest.png" />
+    <Content Include="Base\Icons\appbar.feature.settings.rest.png" />
+    <Content Include="Base\Icons\appbar.feature.video.rest.png" />
+    <Content Include="Base\Icons\appbar.folder.rest.png" />
+    <Content Include="Base\Icons\appbar.minus.rest.png" />
+    <Content Include="Base\Icons\appbar.new.rest.png" />
+    <Content Include="Base\Icons\appbar.next.rest.png" />
+    <Content Include="Base\Icons\appbar.overflowdots.png" />
+    <Content Include="Base\Icons\appbar.questionmark.rest.png" />
+    <Content Include="Base\Icons\appbar.refresh.rest.png" />
+    <Content Include="Base\Icons\appbar.save.rest.png" />
+    <Content Include="Base\Icons\appbar.share.rest.png" />
+    <Content Include="Base\Icons\appbar.stop.rest.png" />
+    <Content Include="Base\Icons\appbar.sync.rest.png" />
+    <Content Include="Base\Icons\appbar.transport.ff.rest.png" />
+    <Content Include="Base\Icons\appbar.transport.pause.rest.png" />
+    <Content Include="Base\Icons\appbar.transport.play.rest.png" />
+    <Content Include="Base\Icons\appbar.transport.rew.rest.png" />
+    <Content Include="Base\Icons\appbar.upload.rest.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="SplashScreenImage2.jpg" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

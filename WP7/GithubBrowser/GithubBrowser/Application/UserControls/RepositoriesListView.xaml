@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="GithubBrowser.UserControls.RepositoriesListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" 
+    xmlns:GalaSoft_MvvmLight_Command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"             
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="600" d:DesignWidth="480" 
+    DataContext="{Binding Source={StaticResource Locator}, Path=RepositoriesViewModel}">
+    
+    <Grid x:Name="LayoutRoot">
+        <ListBox x:Name="Repositories" ItemsSource="{Binding Repositories}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Tap">
+                    <GalaSoft_MvvmLight_Command:EventToCommand Command="{Binding RepositorySelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=Repositories}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="0,0,0,20">
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Style="{StaticResource PhoneTextLargeStyle}"/>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding Description}" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

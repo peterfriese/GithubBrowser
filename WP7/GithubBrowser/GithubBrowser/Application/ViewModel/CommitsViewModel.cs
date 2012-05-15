@@ -13,13 +13,14 @@ using System.Collections.ObjectModel;
 using GithubBrowser.Model;
 using RestSharp;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace GithubBrowser.ViewModel
 {
     public class CommitsViewModel: BaseViewModel
     {
 
-        public CommitsViewModel(RepositoryViewModel repositoryViewModel, ApplicationNavigationService navigationService): base(repositoryViewModel, navigationService)
+        public CommitsViewModel(RepositoryViewModel repositoryViewModel, ApplicationNavigationService navigationService, BaseRestService restService): base(repositoryViewModel, navigationService, restService)
         {
         }
 
@@ -35,9 +36,9 @@ namespace GithubBrowser.ViewModel
         protected override void LoadData()
         {
             BeginLoading();
+            System.Threading.Thread.Sleep(250);
 
-            var client = new RestClient();
-            client.BaseUrl = "https://api.github.com";
+            var client = RestService.Client;
             var request = new RestRequest();
 
             if (ApplicationNavigationService != null)

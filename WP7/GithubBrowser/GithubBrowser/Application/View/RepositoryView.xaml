@@ -44,8 +44,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <toolkit:PerformanceProgressBar Name="performanceProgressBar1" IsIndeterminate="{Binding Path=Loading}" />
-        
         <!--Pivot Control-->
         <controls:Pivot Title="{Binding Path=Repository.Name}" Grid.Row="1">
             <!--Pivot item one-->

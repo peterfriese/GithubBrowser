@@ -7,13 +7,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
+             xmlns:converters="clr-namespace:GithubBrowser.Utils.Converters"             
              xmlns:vm="clr-namespace:GithubBrowser.ViewModel">
 
     <Application.Resources>
-        <!--Global View Model Locator-->
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator"
                              d:IsDataSource="True" />
+            
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:NegatingConverter x:Key="NegatingConverter" />
+            
             <Style x:Key="Transition" TargetType="phone:PhoneApplicationPage">
                 <Setter Property="toolkit:TransitionService.NavigationInTransition">
                     <Setter.Value>

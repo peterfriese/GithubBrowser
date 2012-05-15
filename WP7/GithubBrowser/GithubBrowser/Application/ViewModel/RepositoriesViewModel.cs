@@ -9,13 +9,14 @@ using System;
 using System.Linq;
 using GithubBrowser.Service;
 using System.Windows;
+using System.ComponentModel;
 
 namespace GithubBrowser.ViewModel
 {
     public class RepositoriesViewModel : BaseViewModel
     {
 
-        public RepositoriesViewModel(ApplicationNavigationService navigationService): base(navigationService)
+        public RepositoriesViewModel(ApplicationNavigationService navigationService, BaseRestService restService): base(navigationService, restService)
         {
         }
 
@@ -33,13 +34,13 @@ namespace GithubBrowser.ViewModel
         {
             BeginLoading();
 
-            var client = new RestClient();
-            client.BaseUrl = "https://api.github.com";
+            var client = RestService.Client;
             var request = new RestRequest();
 
             if (ApplicationNavigationService != null)
             {
-                string user = ApplicationNavigationService.GetParameter("user", "peterfriese");
+                // use this if we navigate here using a URI: string user = ApplicationNavigationService.GetParameter("user", "applause");
+                string user = RestService.Login;
                 request.Resource = String.Format("users/{0}/repos", user);
                 client.ExecuteAsync<List<Repository>>(request, response =>
                 {
@@ -86,7 +87,7 @@ namespace GithubBrowser.ViewModel
                     {
                         Deployment.Current.Dispatcher.BeginInvoke(() =>
                         {
-                            ApplicationNavigationService.NavigateTo("/View/RepositoryView.xaml?user={0}&repository={1}", repository.Owner.Login, repository.Name);
+                            ApplicationNavigationService.NavigateTo("/Application/View/RepositoryView.xaml?user={0}&repository={1}", repository.Owner.Login, repository.Name);
                         });
                     }
                 }));

@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using GithubBrowser.Model;
 using GithubBrowser.Service;
 using System;
+using System.ComponentModel;
 
 namespace GithubBrowser.ViewModel
 {
     public class RepositoryViewModel : BaseViewModel
     {
 
-        public RepositoryViewModel(ApplicationNavigationService navigationService): base(navigationService)
+        public RepositoryViewModel(ApplicationNavigationService navigationService, BaseRestService restService): base(navigationService, restService)
         {
         }
 
@@ -31,7 +32,7 @@ namespace GithubBrowser.ViewModel
         {
             BeginLoading();
 
-            var client = new RestClient();
+            var client = RestService.Client;
             client.BaseUrl = "https://api.github.com";
             var request = new RestRequest();
 
@@ -86,7 +87,7 @@ namespace GithubBrowser.ViewModel
             {
                 if (_commitsViewModel == null)
                 {
-                    _commitsViewModel = new CommitsViewModel(this, ApplicationNavigationService);
+                    _commitsViewModel = new CommitsViewModel(this, ApplicationNavigationService, RestService);
                     RaisePropertyChanged("CommitsViewModel");
                 }
                 return _commitsViewModel;

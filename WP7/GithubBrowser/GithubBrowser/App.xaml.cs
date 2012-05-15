@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using GithubBrowser.ViewModel;
+using GalaSoft.MvvmLight.Messaging;
+using GithubBrowser.Utils;
 
 namespace GithubBrowser
 {
@@ -129,6 +131,7 @@ namespace GithubBrowser
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
+
         }
 
         // Do not add any additional code to this method
@@ -137,6 +140,8 @@ namespace GithubBrowser
             // Set the root visual to allow the application to render
             if (RootVisual != RootFrame)
                 RootVisual = RootFrame;
+
+            GlobalProgressIndicator.Default.Initialize(RootFrame);
 
             // Remove this handler since it is no longer needed
             RootFrame.Navigated -= CompleteInitializePhoneApplication;

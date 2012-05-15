@@ -21,7 +21,12 @@ namespace GithubBrowser.Extensions
 
         public static void ShowSplash(this PhoneApplicationPage page)
         {
-            Popup popup = new Popup() { IsOpen = true, Child = new View.SplashScreen() };
+            Popup popup = new Popup() 
+            { 
+                IsOpen = true, 
+                Child = new UserControls.SplashScreen() 
+            };
+
             BackgroundWorker backroundWorker = new BackgroundWorker();
             RunBackgroundWorker(backroundWorker, popup);
         }

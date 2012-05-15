@@ -10,15 +10,18 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight;
 using GithubBrowser.Service;
+using GalaSoft.MvvmLight.Messaging;
+using System.ComponentModel;
 
 namespace GithubBrowser.ViewModel
 {
     public abstract class BaseViewModel : ViewModelBase
     {
-        public BaseViewModel(BaseViewModel parentViewModel, ApplicationNavigationService navigationService)
+        public BaseViewModel(BaseViewModel parentViewModel, ApplicationNavigationService navigationService, BaseRestService restService)
         {
             ParentViewModel = parentViewModel;
             ApplicationNavigationService = navigationService;
+            RestService = restService;
             if (IsInDesignMode)
             {
                 LoadSampleData();
@@ -27,9 +30,18 @@ namespace GithubBrowser.ViewModel
             {
                 // LoadData();
             }
+
+            Messenger.Default.Register<AuthenticationMessage>(RestService, (msg) =>
+            {
+                if (msg.LoggedIn)
+                {
+                    Refresh();
+                }
+            });
+
         }
 
-        public BaseViewModel(ApplicationNavigationService navigationService): this(null, navigationService)
+        public BaseViewModel(ApplicationNavigationService navigationService, BaseRestService restService): this(null, navigationService, restService)
         {
         }
 
@@ -43,6 +55,7 @@ namespace GithubBrowser.ViewModel
         }
 
         protected ApplicationNavigationService ApplicationNavigationService { get; set; }
+        protected BaseRestService RestService { get; set; }
 
         private int _loadingParties = 0;
         public bool Loading
@@ -74,25 +87,26 @@ namespace GithubBrowser.ViewModel
                     {
                         _loadingParties--;
                     }
+                    Messenger.Default.Send<ProgressMessage>(new ProgressMessage(_loadingParties));
                 }
-                RaisePropertyChanged("Loading");
+                // RaisePropertyChanged("Loading");
             }
         }
 
         protected void BeginLoading()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
+            //Deployment.Current.Dispatcher.BeginInvoke(() =>
+            //{
                 Loading = true;
-            });
+            //});
         }
 
         protected void DoneLoading()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
+            //Deployment.Current.Dispatcher.BeginInvoke(() =>
+            //{
                 Loading = false;
-            });
+            //});
         }
 
         protected abstract void LoadSampleData();

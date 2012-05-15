@@ -10,11 +10,11 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace GithubBrowser.View
+namespace GithubBrowser.UserControls
 {
-    public partial class SplashScreen : UserControl
+    public partial class SignInScreen : UserControl
     {
-        public SplashScreen()
+        public SignInScreen()
         {
             InitializeComponent();
         }

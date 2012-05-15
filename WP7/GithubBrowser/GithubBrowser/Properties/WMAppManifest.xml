@@ -19,7 +19,7 @@
       <Capability Name="ID_CAP_APPOINTMENTS" />
     </Capabilities>
     <Tasks>
-      <DefaultTask Name="_default" NavigationPage="View/RepositoriesView.xaml?user=applause" />
+      <DefaultTask Name="_default" NavigationPage="/Application/View/HomeView.xaml" />
     </Tasks>
     <Tokens>
       <PrimaryToken TokenID="GithubBrowserToken" TaskName="_default">
