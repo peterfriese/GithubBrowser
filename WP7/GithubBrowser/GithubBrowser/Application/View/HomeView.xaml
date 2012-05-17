@@ -32,6 +32,9 @@
             <shell:ApplicationBarIconButton IconUri="/Base/Icons/appbar.refresh.rest.png" Text="refresh"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
+    <i:Interaction.Behaviors>
+        <AppBarUtils:AppBarPropertyBinder IsVisible="{Binding Path=IsLoggedIn}" />
+    </i:Interaction.Behaviors>
     <i:Interaction.Triggers>
         <AppBarUtils:AppBarItemTrigger Id="about" Text="about" Type="MenuItem">
             <ec:NavigateToPageAction TargetPage="/Application/View/AboutView.xaml" />
