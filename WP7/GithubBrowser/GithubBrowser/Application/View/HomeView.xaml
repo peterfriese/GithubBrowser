@@ -22,8 +22,9 @@
     Style="{StaticResource Transition}"
     xmlns:usercontrols="clr-namespace:GithubBrowser.UserControls" 
     DataContext="{Binding Mode=OneWay, Source={StaticResource Locator}, Path=HomeViewModel}">
+    
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar>
+        <shell:ApplicationBar IsVisible="True">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="about"/>
                 <shell:ApplicationBarMenuItem Text="logout"/>
@@ -38,11 +39,14 @@
         <AppBarUtils:AppBarItemTrigger Id="refresh" Text="reload" Type="Button">
             <i:InvokeCommandAction Command="{Binding Path=RefreshCommand}" />
         </AppBarUtils:AppBarItemTrigger>
+        <AppBarUtils:AppBarItemTrigger Id="logout" Text="logout" Type="MenuItem">
+            <i:InvokeCommandAction Command="{Binding Path=LogoutCommand}" />
+        </AppBarUtils:AppBarItemTrigger>
     </i:Interaction.Triggers>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Popup IsOpen="{Binding Path=IsLoggedIn, Mode=OneWay, Converter={StaticResource NegatingConverter}}" DataContext="{Binding Source={StaticResource Locator}, Path=SignInViewModel}">
+        <Popup IsOpen="{Binding Path=IsLoggedIn, Mode=OneWay, Converter={StaticResource NegatingConverter}}">
             <usercontrols:SignInScreen HorizontalAlignment="Left" VerticalAlignment="Top" />
         </Popup>
         <!--Pivot Control-->

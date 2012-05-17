@@ -27,9 +27,9 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Height="30" HorizontalAlignment="Left" Text="Github login" VerticalAlignment="Top" Margin="9,0,0,0" />
             <TextBox Height="72" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,25,0,0" Text="{Binding Mode=TwoWay, Path=Login}" />
-            <TextBlock Height="30" HorizontalAlignment="Left" Margin="9,100,0,0" Text="Password" VerticalAlignment="Top" />
-            <PasswordBox Height="72" HorizontalAlignment="Stretch" Margin="0,125,0,0" VerticalAlignment="Top" Password="{Binding Password, Mode=TwoWay}" />
-            <Button Content="sign in" Height="72" HorizontalAlignment="Stretch" x:Name="button1" Width="Auto" VerticalAlignment="Top" Margin="0,225,0,0" Command="{Binding Path=SignInCommand}" />
+            <TextBlock Height="30" HorizontalAlignment="Left" Margin="9,90,0,0" Text="Password" VerticalAlignment="Top" />
+            <PasswordBox Height="72" HorizontalAlignment="Stretch" Margin="0,115,0,0" VerticalAlignment="Top" Password="{Binding Password, Mode=TwoWay}" />
+            <Button Content="sign in" Height="72" HorizontalAlignment="Stretch" x:Name="button1" Width="Auto" VerticalAlignment="Top" Margin="0,180,0,0" Command="{Binding Path=SignInCommand}" />
         </Grid>
     </Grid>
 </UserControl>

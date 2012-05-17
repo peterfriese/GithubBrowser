@@ -32,7 +32,7 @@ namespace GithubBrowser.Service
                 {
                     var result = IsolatedStorageSettings.ApplicationSettings["Login"];
                     if (result == null)
-                        return "";
+                        return null;
                     else
                         return result.ToString();
                 }
@@ -53,7 +53,7 @@ namespace GithubBrowser.Service
                 {
                     var result = IsolatedStorageSettings.ApplicationSettings["Password"];
                     if (result == null)
-                        return "";
+                        return null;
                     else
                         return result.ToString();
                 }
@@ -74,7 +74,6 @@ namespace GithubBrowser.Service
             }
             else
             {
-                IsAuthenticated = false;
             }
         }
 
@@ -89,26 +88,29 @@ namespace GithubBrowser.Service
             {
                 if (response.ResponseStatus == ResponseStatus.Completed)
                 {
-                    IsAuthenticated = true;
                 }
                 else 
                 {
-                    IsAuthenticated = false;
+                    Login = null;
+                    Password = null;
                 }
+                Messenger.Default.Send<AuthenticationMessage>(new AuthenticationMessage(_isAuthenticated));
             });
+        }
+
+        public void UnAuthenticate()
+        {
+            Login = null;
+            Password = null;
+            Messenger.Default.Send<AuthenticationMessage>(new AuthenticationMessage(_isAuthenticated));
         }
 
         private bool _isAuthenticated = true;
         public bool IsAuthenticated { 
             get 
             {
-                return _isAuthenticated;
+                return ((Password != null) && (Login != null));
             }
-            protected set 
-            {
-                _isAuthenticated = value;
-                Messenger.Default.Send<AuthenticationMessage>(new AuthenticationMessage(_isAuthenticated));
-            } 
         }
 
         private RestClient _client;

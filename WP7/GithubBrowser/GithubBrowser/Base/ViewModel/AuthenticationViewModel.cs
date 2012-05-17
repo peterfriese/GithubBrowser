@@ -15,10 +15,10 @@ using System.ComponentModel;
 
 namespace GithubBrowser.ViewModel
 {
-    public class SignInViewModel: BaseViewModel
+    public class AuthenticationViewModel: BaseViewModel
     {
 
-        public SignInViewModel(ApplicationNavigationService navigationService, BaseRestService restService)
+        public AuthenticationViewModel(ApplicationNavigationService navigationService, BaseRestService restService)
             : base(navigationService, restService)
         {
             Messenger.Default.Register<AuthenticationMessage>(RestService, (msg) => {
@@ -101,6 +101,18 @@ namespace GithubBrowser.ViewModel
                 return _signInCommand ?? (_signInCommand = new RelayCommand(() =>
                 {
                     RestService.Authenticate(Login, Password);
+                }));
+            }
+        }
+
+        private RelayCommand _logoutCommand;
+        public RelayCommand LogoutCommand
+        {
+            get
+            {
+                return _logoutCommand ?? (_logoutCommand = new RelayCommand(() =>
+                {
+                    RestService.UnAuthenticate();
                 }));
             }
         }

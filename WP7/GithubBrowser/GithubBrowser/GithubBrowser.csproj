@@ -117,7 +117,7 @@
     <Compile Include="Application\ViewModel\ProgressMessage.cs" />
     <Compile Include="Application\ViewModel\RepositoriesViewModel.cs" />
     <Compile Include="Application\ViewModel\RepositoryViewModel.cs" />
-    <Compile Include="Application\ViewModel\SignInViewModel.cs" />
+    <Compile Include="Base\ViewModel\AuthenticationViewModel.cs" />
     <Compile Include="Application\ViewModel\ViewModelLocator.cs" />
     <Compile Include="Application\ViewModel\WelcomeViewModel.cs" />
     <Compile Include="Application\View\AboutView.xaml.cs">

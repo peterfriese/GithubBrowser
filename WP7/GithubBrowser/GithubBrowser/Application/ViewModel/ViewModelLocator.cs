@@ -41,7 +41,7 @@ namespace GithubBrowser.ViewModel
             {
                 if (_homeViewModel == null)
                 {
-                    _homeViewModel = new HomeViewModel();
+                    _homeViewModel = new HomeViewModel(ApplicationNavigationService, GithubService);
                 }
                 return _homeViewModel;
             }
@@ -71,11 +71,11 @@ namespace GithubBrowser.ViewModel
             }
         }
 
-        public SignInViewModel SignInViewModel
+        public AuthenticationViewModel SignInViewModel
         {
             get
             {
-                return new SignInViewModel(ApplicationNavigationService, GithubService);
+                return new AuthenticationViewModel(ApplicationNavigationService, GithubService);
             }
         }
 

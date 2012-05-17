@@ -8,11 +8,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using GithubBrowser.Service;
 
 namespace GithubBrowser.ViewModel
 {
     public class HomeViewModel: BasePivotViewModel
     {
+        public HomeViewModel(ApplicationNavigationService navigationService, BaseRestService restService)
+            : base(navigationService, restService)
+        {
+        }
 
     }
 }

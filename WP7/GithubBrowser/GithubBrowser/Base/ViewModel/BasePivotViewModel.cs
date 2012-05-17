@@ -11,19 +11,24 @@ using System.Windows.Shapes;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Phone.Controls;
+using GithubBrowser.Service;
 
 namespace GithubBrowser.ViewModel
 {
-    public class BasePivotViewModel: ViewModelBase
+    public class BasePivotViewModel : AuthenticationViewModel
     {
         protected BaseViewModel CurrentViewModel { get; set; }
 
+        // this command will be invoked when the user changes from one pivot element to another one
         public RelayCommand<SelectionChangedEventArgs> PivotChangedCommand { get; private set; }
 
         public RelayCommand RefreshCommand { get; private set; }
 
-        public BasePivotViewModel()
+        public BasePivotViewModel(ApplicationNavigationService navigationService, BaseRestService restService): base(navigationService, restService)
         {
+
+            // when the user changes from one pivot item to another one, we take note of the new viewmodel
+            // so we can invoke commands on it (e.g. refresh)
             PivotChangedCommand = new RelayCommand<SelectionChangedEventArgs>(action =>
             {
                 if (action != null)
