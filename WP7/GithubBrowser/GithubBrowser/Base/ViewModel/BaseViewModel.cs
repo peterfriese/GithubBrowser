@@ -28,7 +28,10 @@ namespace GithubBrowser.ViewModel
             }
             else
             {
-                // LoadData();
+                if (RestService.IsAuthenticated)
+                {
+                    Refresh();
+                }
             }
 
             Messenger.Default.Register<AuthenticationMessage>(RestService, (msg) =>
