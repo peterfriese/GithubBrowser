@@ -14,28 +14,10 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" DataContext="{Binding Source={StaticResource Locator}, Path=RepositoryViewModel}">
-
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn"/>
-            </toolkit:NavigationInTransition.Forward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut"/>
-            </toolkit:NavigationOutTransition.Backward>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardOut"/>
-            </toolkit:NavigationOutTransition.Forward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
+    toolkit:TiltEffect.IsTiltEnabled="True"
+    Style="{StaticResource Transition}"
+    shell:SystemTray.IsVisible="True" 
+    DataContext="{Binding Source={StaticResource Locator}, Path=RepositoryViewModel}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -44,26 +26,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <!--Pivot Control-->
         <controls:Pivot Title="{Binding Path=Repository.Name}" Grid.Row="1">
-            <!--Pivot item one-->
             <controls:PivotItem Header="Details">
-                <StackPanel Margin="0,0,0,20">
-                    <TextBlock HorizontalAlignment="Left" Margin="0,0,0,20" Name="textBlock1" VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding Path=Repository.Description}" />
-                    <TextBlock Margin="0,0,0,0" Text="Owner" Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.Owner.Login}" Style="{StaticResource PhoneTextAccentStyle}"/>
-                    <TextBlock Margin="0,0,0,0" Text="Forked from" Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBlock Margin="0,0,0,20" Text="restkit/restkit" Style="{StaticResource PhoneTextAccentStyle}"/>
-                    <TextBlock Margin="0,0,0,0" Text="Watchers" Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.Watchers}" Style="{StaticResource PhoneTextAccentStyle}"/>
-                    <TextBlock Margin="0,0,0,0" Text="Forks" Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.Forks}" Style="{StaticResource PhoneTextAccentStyle}"/>
-                    <TextBlock Margin="0,0,0,0" Text="Issues" Style="{StaticResource PhoneTextLargeStyle}" />
-                    <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.OpenIssues}" Style="{StaticResource PhoneTextAccentStyle}"/>
-                </StackPanel>
+                <ScrollViewer x:Name="ContentScroll">
+                    <StackPanel Margin="0,0,0,20">
+                        <!-- The code generator should produce the following elements according to the model. No need for indirection. -->
+                        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,20" Name="textBlock1" VerticalAlignment="Top" TextWrapping="Wrap" Text="{Binding Path=Repository.Description}" />
+                        <TextBlock Margin="0,0,0,0" Text="Owner" Style="{StaticResource PhoneTextLargeStyle}" />
+                        <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.Owner.Login}" Style="{StaticResource PhoneTextAccentStyle}"/>
+                        <TextBlock Margin="0,0,0,0" Text="Forked from" Style="{StaticResource PhoneTextLargeStyle}" Visibility="{Binding Path=Repository.Fork, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        <TextBlock Margin="0,0,0,20" Text="{Binding Path=ForkedFrom}" Style="{StaticResource PhoneTextAccentStyle}" Visibility="{Binding Path=Repository.Fork, Converter={StaticResource BoolToVisibilityConverter}}" />
+                        <TextBlock Margin="0,0,0,0" Text="Watchers" Style="{StaticResource PhoneTextLargeStyle}" />
+                        <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.Watchers}" Style="{StaticResource PhoneTextAccentStyle}"/>
+                        <TextBlock Margin="0,0,0,0" Text="Forks" Style="{StaticResource PhoneTextLargeStyle}" />
+                        <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.Forks}" Style="{StaticResource PhoneTextAccentStyle}"/>
+                        <TextBlock Margin="0,0,0,0" Text="Issues" Style="{StaticResource PhoneTextLargeStyle}" />
+                        <TextBlock Margin="0,0,0,20" Text="{Binding Path=Repository.OpenIssues}" Style="{StaticResource PhoneTextAccentStyle}"/>
+                    </StackPanel>
+                </ScrollViewer>
             </controls:PivotItem>
 
-            <!--Pivot item two-->
             <controls:PivotItem Header="Commits">
                 <Grid>
                     <ListBox x:Name="Commits" ItemsSource="{Binding Path=CommitsViewModel.Commits}">
@@ -86,17 +68,4 @@
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>
-
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-    
 </phone:PhoneApplicationPage>

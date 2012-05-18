@@ -5,6 +5,7 @@ using GithubBrowser.Model;
 using GithubBrowser.Service;
 using System;
 using System.ComponentModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace GithubBrowser.ViewModel
 {
@@ -13,6 +14,11 @@ namespace GithubBrowser.ViewModel
 
         public RepositoryViewModel(ApplicationNavigationService navigationService, BaseRestService restService): base(navigationService, restService)
         {
+            // TODO: there has got to be a simpler way to do this!
+            Messenger.Default.Register<PropertyChangedMessage<Repository>>(this, action =>
+            {
+                RaisePropertyChanged("ForkedFrom");
+            });
         }
 
         protected override void LoadSampleData()
@@ -46,8 +52,8 @@ namespace GithubBrowser.ViewModel
                 {
                     if (response.ResponseStatus == ResponseStatus.Completed)
                     {
+                        var oldValue = Repository;
                         Repository = response.Data;
-                        RaisePropertyChanged(RepositoryPropertyName);
                         DoneLoading();
                     }
                 });
@@ -75,8 +81,19 @@ namespace GithubBrowser.ViewModel
                 var oldValue = _repository;
                 _repository = value;
 
-                // Update bindings, no broadcast
-                RaisePropertyChanged(RepositoryPropertyName);
+                RaisePropertyChanged(RepositoryPropertyName, oldValue, value, true);
+            }
+        }
+
+        public string ForkedFrom
+        {
+            get
+            {
+                if ( (Repository != null) && (Repository.Parent != null) && (Repository.Parent.Owner != null) )
+                {
+                    return String.Format("{0}/{1}", Repository.Parent.Owner.Login, Repository.Parent.Name);
+                }
+                return "";
             }
         }
 

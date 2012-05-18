@@ -44,6 +44,8 @@ namespace GithubBrowser.Model
         public bool HasIssues { get; set; }
         public string HtmlUrl { get; set; }
 
+        public Repository Parent { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
