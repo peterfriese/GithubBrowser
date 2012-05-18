@@ -63,6 +63,22 @@ namespace GithubBrowser.ViewModel
             }
         }
 
+        public UsersViewModel FollowingUsersViewModel
+        {
+            get
+            {
+                return new FollowingUsersViewModel(ApplicationNavigationService, GithubService);
+            }
+        }
+
+        public UsersViewModel FollowersUsersViewModel
+        {
+            get
+            {
+                return new FollowersUsersViewModel(ApplicationNavigationService, GithubService);
+            }
+        }
+
         public WelcomeViewModel WelcomeViewModel
         {
             get

@@ -68,11 +68,15 @@
                     <usercontrols:RepositoriesListView x:Name="repositoriesListView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding}" />
                 </Grid>
             </controls:PivotItem>
-            <controls:PivotItem Header="followers">
-                <Grid/>
+            <controls:PivotItem Header="followers" DataContext="{Binding Source={StaticResource Locator}, Path=FollowersUsersViewModel}">
+                <Grid>
+                    <usercontrols:UsersListView x:Name="followersUsersListView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding}" />
+                </Grid>
             </controls:PivotItem>
-            <controls:PivotItem Header="following">
-                <Grid/>
+            <controls:PivotItem Header="following" DataContext="{Binding Source={StaticResource Locator}, Path=FollowingUsersViewModel}">
+                <Grid>
+                    <usercontrols:UsersListView x:Name="followingUsersListView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding}" />
+                </Grid>
             </controls:PivotItem>
         </controls:Pivot>
     </Grid>

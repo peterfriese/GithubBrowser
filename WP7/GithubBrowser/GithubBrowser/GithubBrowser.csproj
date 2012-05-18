@@ -96,6 +96,15 @@
     <Compile Include="Application\Model\Commit.cs" />
     <Compile Include="Application\Model\Repository.cs" />
     <Compile Include="Application\Model\User.cs" />
+    <Compile Include="Application\UserControls\UsersListView.xaml.cs">
+      <DependentUpon>UsersListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Application\UserControls\WindowsPhoneControl1.xaml.cs">
+      <DependentUpon>WindowsPhoneControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Application\ViewModel\FollowersUsersViewModel.cs" />
+    <Compile Include="Application\ViewModel\FollowingUsersViewModel.cs" />
+    <Compile Include="Application\ViewModel\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\Service\ApplicationNavigationService.cs" />
     <Compile Include="Base\Service\AuthenticationMessage.cs" />
@@ -135,6 +144,9 @@
     <Compile Include="Application\View\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SampleData\SampleDataSource\SampleDataSource.xaml.cs">
+      <DependentUpon>SampleDataSource.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -146,6 +158,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Application\UserControls\SignInScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\UserControls\UsersListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\UserControls\WindowsPhoneControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignTimeOnly Include="SampleData\SampleDataSource\SampleDataSource.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </DesignTimeOnly>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -176,6 +200,7 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
+    <DesignTimeOnly Include="SampleData\SampleDataSource\SampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ApplicationIcon.png" />
@@ -215,7 +240,6 @@
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="SplashScreenImage2.jpg" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
